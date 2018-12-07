@@ -1,0 +1,58 @@
+<style>
+	h1 {
+		text-align: center;
+	}
+
+	.card {
+		color: inherit;
+	}
+</style>
+
+<div class="container">
+	<div class="row">
+		<div class="input-group mb-3 col-4">
+			<input type="text" id="name-field" class="form-control" placeholder="Type to Filter Name">
+			<div style="padding-left: 10px"><a role="button" href="/newlanguage" class="btn btn-primary" >New Language</a></div>
+		</div>
+	<div>
+	
+	{{#if langs}}
+	{{#if filter}}
+	<h5>Filtered by {{filter}}</h5>
+	{{/if}}
+	<div class="card-columns">
+		{{#each langs}}
+		<a class="card" id={{this.id_name}} href="/name/{{this.id_name}}">
+    		<div class="card-body">
+      			<h5 class="card-title">{{this.name}}</h5>
+      			<p class="card-text">Features: {{this.features}}</p>
+    		</div>
+    		<div class="card-footer">
+    			Rating: {{this.avg_rating}}
+    		</div>
+  		</a>
+  		{{/each}}
+	</div>
+	{{else}}
+	<h1>No Languages Found!</h1>
+	{{/if}}
+	<h1 id="no-lang">"<t id="lang-in"></t>" not found</h1>
+</div>
+
+<script>
+	$("#no-lang").hide()
+	$("#name-field").keyup(function() {
+		$("#no-lang").hide()
+		if ($(this).val() == "") {
+			$(".card").show()
+		} else {
+			$(".card").hide()
+			$(`.card[id*=${$(this).val().toLowerCase()}]`).show()
+			if($(".card:visible").length == 0) {
+				$("#no-lang").show()
+				$("#lang-in").text($(this).val())
+			}
+
+		}
+	});
+</script>

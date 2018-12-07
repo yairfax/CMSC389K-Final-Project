@@ -1,0 +1,40 @@
+<div class="container">
+	<h1>{{lang.name}}<span style="float:right;"><button type="button" id="delete" class="btn btn-danger">Delete</button></span></h1>
+	<h4>Average Rating: {{lang.avg_rating}}</h4>
+	<p>Features: <span style="float:right;"><a href="{{lang.docs_link}}">Read Docs</a></span></p>
+	<ul>
+		{{#each lang.features}}
+		<li>{{this}}</li>
+		{{/each}}
+	</ul>
+	Compatibility:
+	<ul>
+		{{#each lang.compatibility}}
+		<li>{{this}}</li>
+		{{/each}}
+	</ul>
+	<h1>Reviews<span style="float:right;"><a role="button" href="/name/{{lang.id_name}}/newreview" class="btn btn-primary">New Review</a></span></h1>
+	{{#each lang.reviews}}
+	<div class="card" style="margin-bottom: 20px">
+		<div class="card-header"><b>{{this.user}}</b>, </i>{{this.occupation}}</i><span style="float:right;">{{this.experience}}</span></div>
+		<div class="card-body">
+			<h5>{{this.rating}} Stars</h5>
+    		<p class="card-text">{{this.comment}}</p>
+		</div>
+		<div class="card-footer text-muted">Posted: {{this.date_posted}}</div>
+	</div>
+	{{/each}}
+	{{#unless lang.reviews}}
+	<h4 style="text-align: center">No Reviews Yet!</h4>
+	{{/unless}}
+</div>
+
+<script>
+	$("#delete").on('click', function() {
+		$.ajax({
+			url: `/api/name/{{lang.id_name}}/delete`,
+			type: 'DELETE',
+			success: function(res) {if (res == 'Success!') window.location.assign("/")}
+		})
+	});
+</script>

@@ -1,0 +1,35 @@
+<div class="container">
+	<form method="POST" action="/api/newlanguage">
+		<div class="form-group">
+			<label for="name">Language Name</label>
+			<input type="text" class="form-control" name="name" required>
+		</div>
+		<div class="form-group">
+			<label for="features">Features</label>
+			{{#each features}}
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="{{this}}" name="features">
+				<label class="form-check-label" for="{{this}}">{{this}}</label>
+			</div>
+			{{/each}}
+		</div>
+		<div class="form-group">
+			<label for="features">Compatibility</label>
+			{{#each compatibility}}
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="{{this}}" name="compatibility">
+				<label class="form-check-label" for="{{this}}">{{this}}</label>
+			</div>
+			{{/each}}
+		</div>
+		<div class="form-group">
+			<label for="avg_rating">Initial Rating</label>
+			<input type="number" class="form-control" name="avg_rating" min="1" max="5" required>
+		</div>
+		<div class="form-group">
+			<label for="docs_link">Docs URL</label>
+			<input type="text" class="form-control" name="docs_link" required>
+		</div>
+		<button class="btn btn-primary" type="submit">Submit</button>
+	</form>
+</div>

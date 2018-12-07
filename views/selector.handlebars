@@ -1,0 +1,21 @@
+<style>
+	.list-group-item {
+		color: inherit;
+	}
+
+	.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+	}
+</style>
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+    {{head}}
+  </div>
+  <ul class="list-group list-group-flush">
+    {{#each list}}
+	  <a class="list-group-item" href="{{../path}}{{this}}">{{this}}</a>
+    {{/each}}
+  </ul>
+</div>
